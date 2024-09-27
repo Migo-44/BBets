@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "BBets"
 author: "Angelica Romero"
 output: html_document
 date: "2024-09-27"
@@ -14,3 +14,63 @@ Find the probability that at least two student have the same birthday.  If 26 st
 2. Assume class size is 26 instead of 35.  With the same bet ($1 ot $1) what is the probability Dr. J wins the bet now.  If 20 of the 26 students make the bet, what is Dr. J's expected profit/loss?
 
 3. What size class (how many students) makes the $1 againt $1 a fair bet?
+
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(ggplot2)
+```
+
+
+```{r}
+# Function to check if there are duplicates in birthdays
+has_duplicate_birthdays <- function(n) {
+  birthdays <- sample(1:365, n, replace = TRUE)
+  return(length(birthdays) != length(unique(birthdays)))
+}
+
+# Parameters
+class_size <- 35
+num_simulations <- 100
+results <- numeric(num_simulations)
+
+# Run the simulations
+set.seed(42) # For reproducibility
+for (i in 1:num_simulations) {
+  results[i] <- has_duplicate_birthdays(class_size)
+}
+
+# Calculate the probabilities
+probabilities <- mean(results) # Probability of at least one duplicate
+```
+
+
+```{r}
+# Plotting the histogram of results
+ggplot(data.frame(probabilities = results), aes(x = probabilities)) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Histogram of Probabilities", x = "Probability", y = "Frequency") +
+  theme_minimal()
+```
+
+```{r}
+# Print the mean probability
+mean_prob <- mean(results)
+cat("mean =", mean_prob, "\n")
+
+# Calculate 95% confidence interval
+ci <- quantile(results, probs = c(0.025, 0.975))
+cat("95% Confidence Interval: [", ci[1], ", ", ci[2], "]\n", sep = "")
+
+```
+
+```{r}
+EV=mean_prob*26-(1-mean_prob)*26
+print(paste("ev=",EV)) 
+```
+```{r}
+FAIR=(mean_prob)/(1-mean_prob)
+print(paste("fairbet=", FAIR)) 
+```
+
+
