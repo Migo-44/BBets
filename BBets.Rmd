@@ -2,7 +2,7 @@
 title: "BBets"
 author: "Angelica Romero"  
 output: html_document
-date: "2024-09-27"
+date: "2024-09-27"     
 ---
 
 
@@ -17,7 +17,7 @@ c)How much should Dr. J wager against the student's $1 to make this a fair bet?
 a) With the same bet ($1 to $1) what is the probability Dr. J wins the bet now.  
 b) If 20 of the 27 students make the bet, what is Dr. J's expected profit/loss?
 
-3. What size class (how many students) makes the $1 againt $1 a fair bet?
+3. What size class (how many students) makes the $1 againt $1 a fair bet?       
 
 
 ```{r setup, include=FALSE}
@@ -82,3 +82,66 @@ hist(probs, main = "Histogram of Probailities", xlab = "Probability", col = "lig
 
 ```
 
+```{r}
+ # Calculate 95% Confidence Interval
+error_margin <- qt(0.975, df=n_trials-1) * sd_probs / sqrt(n_trials)
+conf_interval <- c(mean_probs - error_margin, mean_probs + error_margin)
+
+cat("95% Confidence Interval for the Mean Probability:[", conf_interval[1], conf_interval[2], "]\n")
+
+```
+
+The confidence interval is 0.811 to 0.816. 
+
+Get answers for a smaller class
+
+```{r}
+# Simulation settings
+class_size <- 27
+n_sim <- 1000
+n_trials <- 100
+
+#Vector to store the probabilities from each trial 
+probs <- numeric(n_trials) 
+```
+
+## mean and std dev
+
+```{r}
+#Print mean, std of probabilities
+
+mean_probs <- mean(probs)
+sd_probs <- sd(probs) 
+
+cat 
+cat("Standard Deviation of Probabilities:", sd_probs, "\n") 
+
+```
+
+
+```{r}
+# Simulation settings 
+class_size <- 23
+n_sim <- 1000
+n_trials <- 100 
+
+#Vector to store the probabilities from each trial
+probs <- numeric(n_trials) 
+
+#Run the simulation 100 times
+for (i in 1:n_trials) {
+  probs[i] <- same_birthday_prob(class_size, n_sim)
+}
+
+cat("probability of win =", mean(probs)) 
+
+```
+The number of fair students for a fair game 1:1 is 23
+
+## Explanation: 
+
+- **`same_birthday_prob` function**: Simulates whether at least two people in a group of class `class_size` share a birthday, repeated `n_sim` times. It returns the proportion of simulations where a birthday match occurs. 
+- **`probs` vector**: Stores the results of running the birthday problem simulation 100 times.
+- **Mean, standard deviation, and histogram**: Summarizes and visualizes the distribution of probabilities.
+- **Confidence interval**: Calculates a 95% confidence interval for the mean of the simulated probabilities.
+ 
