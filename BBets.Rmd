@@ -103,20 +103,40 @@ n_trials <- 100
 
 #Vector to store the probabilities from each trial 
 probs <- numeric(n_trials) 
+
+#Run the simulation 100 times 
+for (i in 1:n_trials) {
+  probs[i] <- same_birthday_prob(class_size, n_sim) 
+}
+
+cat("proability of win =" , mean(probs)) 
+```
+```{r}
+EV=mean(probs)*1*20
+cat("expected profit =" , EV) 
 ```
 
 ## mean and std dev
 
-```{r}
-#Print mean, std of probabilities
+```{r echo=F}
+#Simulation settings
+class_size <- 27
+n_sim <- 1000
+n_trials <- 100
 
-mean_probs <- mean(probs)
-sd_probs <- sd(probs) 
+#Vector to store the probabilities from each trial
+probs <- numeric(n_trials) 
 
-cat 
-cat("Standard Deviation of Probabilities:", sd_probs, "\n") 
+#Run the simulation 100 times
+for (i in 1:n_trials) {
+  probs[i] <- same_birthday_prob(class_size, n_sim) 
+} 
+
+cat("probaility of win =" , mean(probs)) 
 
 ```
+
+
 
 
 ```{r}
