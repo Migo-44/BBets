@@ -24,6 +24,8 @@ b) If 20 of the 27 students make the bet, what is Dr. J's expected profit/loss?
 set.seed(123)  #Set seed for reproducibility
 ```
 
+
+
 ```{r}
 # Function to simulate if two or more people share a birthday
 same_birthday_prob <- function(class_size, n_sim) {
@@ -66,7 +68,9 @@ cat("Standard Deviation of Probabilities:", sd_probs, "\n")
 
 ```
 
-The probability that Dr.J wins is .813. 
+The probability that two students have the same birthday is 0.816. 
+
+
 
 ```{r}
 EV= mean_probs*1*26
@@ -77,10 +81,26 @@ cat("correct bet=", correctbet)
 
 ```
 
+In a class of 26, Dr.J's expected profit is 21.15. 
+
+
+
 ```{r}
 hist(probs, main = "Histogram of Probailities", xlab = "Probability", col = "lightblue", border = "black")
 
 ```
+
+```{r}
+cat("probability Dr.J wins is", mean_probs) 
+```
+
+
+```{r}
+EV = (0.815)*1*26 - (1-0.815*1*26) 
+print(EV) 
+```
+
+
 
 ```{r}
  # Calculate 95% Confidence Interval
@@ -93,11 +113,37 @@ cat("95% Confidence Interval for the Mean Probability:[", conf_interval[1], conf
 
 The confidence interval is 0.811 to 0.816. 
 
+```{r}
+# Simulation settings
+ class_size <- 35
+ n_sim <- 1000
+ n_trials <- 100
+ 
+ # Vector to store the probabilities from each trial
+ probs <- numeric(n_trials)
+ 
+ # Run the simulation 100 times
+ for (i in 1:n_trials) {
+   probs[i] <- same_birthday_prob(class_size, n_sim)
+ }
+ mean_probs=mean(probs)
+ print(mean_probs)
+```
+
+```{r}
+fairbet = mean_probs/(1 - mean_probs)
+cat("fairbet =", fairbet) 
+```
+
+In order for the bet to be fair, Dr.J should wager $4.40. 
+
+
+
 Get answers for a smaller class
 
 ```{r}
 # Simulation settings
-class_size <- 27
+class_size <- 20
 n_sim <- 1000
 n_trials <- 100
 
@@ -111,6 +157,9 @@ for (i in 1:n_trials) {
 
 cat("proability of win =" , mean(probs)) 
 ```
+
+
+
 ```{r}
 EV=mean(probs)*1*20
 cat("expected profit =" , EV) 
@@ -137,8 +186,6 @@ cat("probaility of win =" , mean(probs))
 ```
 
 
-
-
 ```{r}
 # Simulation settings 
 class_size <- 23
@@ -156,7 +203,9 @@ for (i in 1:n_trials) {
 cat("probability of win =", mean(probs)) 
 
 ```
-The number of fair students for a fair game 1:1 is 23
+The number of students for a fair game 1:1 is 23
+
+
 
 ## Explanation: 
 
