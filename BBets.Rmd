@@ -1,8 +1,8 @@
 ---
 title: "BBets"
-author: "Angelica Romero"  
+author: "Miguel Avila"  
 output: html_document
-date: "2024-09-27"     
+date: "Fall 2024"     
 ---
 
 
@@ -68,7 +68,7 @@ cat("Standard Deviation of Probabilities:", sd_probs, "\n")
 
 ```
 
-The probability that two students have the same birthday is 0.816. 
+The probability that two students would have the same birthday is 0.816. 
 
 
 
@@ -81,7 +81,7 @@ cat("correct bet=", correctbet)
 
 ```
 
-In a class of 26, Dr.J's expected profit is 21.15. 
+In a class of 26 students, Professor J's expected profit is 21.15. 
 
 
 
@@ -111,7 +111,7 @@ cat("95% Confidence Interval for the Mean Probability:[", conf_interval[1], conf
 
 ```
 
-The confidence interval is 0.811 to 0.816. 
+The confidence interval would be 0.811 to 0.816. 
 
 ```{r}
 # Simulation settings
@@ -135,7 +135,7 @@ fairbet = mean_probs/(1 - mean_probs)
 cat("fairbet =", fairbet) 
 ```
 
-In order for the bet to be fair, Dr.J should wager $4.40. 
+In order for the bet to be fair, Professor J would need to wager $4.40. 
 
 
 
@@ -203,7 +203,7 @@ for (i in 1:n_trials) {
 cat("probability of win =", mean(probs)) 
 
 ```
-The number of students for a fair game 1:1 is 23
+The number of students needed for a fair game 1:1 is 23
 
 
 
